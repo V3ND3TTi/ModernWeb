@@ -1,5 +1,16 @@
+using Northwind.Web.Components; // To use App
+using Northwind.EntityModels; // To use AddNorthwindContext method.
+
+#region Configure the web server host and services.
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorComponents();
+builder.Services.AddNorthwindContext();
+
 var app = builder.Build();
+
+#endregion
 
 #region Configure the HTTP pipeline and routes
 
@@ -9,8 +20,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAntiforgery();
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.MapRazorComponents<App>();
 
 app.MapGet("/env", () => $"Environment is {app.Environment.EnvironmentName}.");
 
