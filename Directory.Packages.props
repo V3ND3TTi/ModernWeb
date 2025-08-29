@@ -27,4 +27,9 @@
         <PackageVersion Include="Microsoft.Extensions.Caching.Hybrid" Version="9.0.0" />
     </ItemGroup>
 
+	<ItemGroup Label="For Blazor.">
+		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.0" />
+		<PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
+	</ItemGroup>
+
 </Project>
