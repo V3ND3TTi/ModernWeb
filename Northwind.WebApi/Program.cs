@@ -1,7 +1,7 @@
 using Northwind.EntityModels; // To use AddNorthwindContext method.
 using Microsoft.Extensions.Caching.Hybrid; // To use HybridCacheEntryOptions.
 using Northwind.WebApi.Repositories; // To use ICustomerRepository.
-using Microsoft.AspNetCore.HttpLogging;
+//using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +20,12 @@ builder.Services.AddHybridCache(options =>
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-builder.Services.AddHttpLogging(options =>
+/*builder.Services.AddHttpLogging(options =>
 {
     options.LoggingFields = HttpLoggingFields.All;
     options.RequestBodyLogLimit = 4096; // default is 32k
     options.ResponseBodyLogLimit = 4096; // default is 32k
-});
+});*/
 
 var app = builder.Build();
 
@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpLogging();
+//app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 
