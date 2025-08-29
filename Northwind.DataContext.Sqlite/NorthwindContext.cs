@@ -36,39 +36,22 @@ public partial class NorthwindContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             string database = "Northwind.db";
-            string dir = Environment.CurrentDirectory;
-            string path = string.Empty;
-
-            if (dir.EndsWith("net9.0"))
-            {
-                // In the <project>\bin\<Debug|Relase>\net9.0 directory.
-                path = Path.Combine("..", "..", "..", "..", database);
-            }
-            else
-            {
-                // In the <project> directory.
-                path = Path.Combine("..", database);
-            }
-
-            path = Path.GetFullPath(path); // Convert to absolute path
-            try
-            {
-                NorthwindContextLogger.WriteLine($"Database path: {path}");
-            }
-            catch (Exception ex)
-            {
-                WriteLine(ex.Message);
-            }
+            string path = Path.Combine(AppContext.BaseDirectory, database);
 
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException(message: $"{path} not found.", fileName: path);
+                throw new FileNotFoundException($"Database file not found at: {path}");
             }
 
             optionsBuilder.UseSqlite($"Data Source={path}");
 
-            optionsBuilder.LogTo(NorthwindContextLogger.WriteLine, new[] { Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting });
+            optionsBuilder.LogTo(
+                NorthwindContextLogger.WriteLine,
+                new[] { Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.CommandExecuting }
+            );
         }
+
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

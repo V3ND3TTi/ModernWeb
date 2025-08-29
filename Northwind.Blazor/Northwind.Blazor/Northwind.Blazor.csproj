@@ -23,4 +23,11 @@
 		<Using Include="Northwind.EntityModels" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="Northwind.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>
