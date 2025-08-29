@@ -1,0 +1,4 @@
+### Configure a variable for the web service base address.
+@base_address = https://localhost:5151/customers/
+
+DELETE {{base_address}}ABCXY
