@@ -6,7 +6,9 @@
 
 <h3>Customers @(string.IsNullOrWhiteSpace(Country)? "Worldwide" : $"in {Country}")</h3>
 <div>
-    <a class="btn btn-info" href="createcustomer"><i class="bi bi-plus-square"></i>Create New</a>
+    <NavLink href="createcustomer" class="btn btn-info">
+      <i class="bi bi-plus-square"></i> Create New
+    </NavLink>
 </div>
 @if (customers is null)
 {
@@ -38,8 +40,12 @@ else
                 </td>
                 <td>@c.Phone</td>
                 <td>
-                    <a class="btn btn-info" href="editcustomer/@c.CustomerId"><i class="bi bi-pencil"></i></a>
-                    <a class="btn btn-danger" href="deletecustomer/@c.CustomerId"><i class="bi bi-trash"></i></a>
+                    <NavLink href="@($"editcustomer/{c.CustomerId}")" class="btn btn-info">
+                      <i class="bi bi-pencil"></i>
+                    </NavLink>
+                    <NavLink href="@($"deletecustomer/{c.CustomerId}")" class="btn btn-danger">
+                      <i class="bi bi-trash"></i>
+                    </NavLink>
                 </td>
             </tr>
           }
@@ -54,7 +60,7 @@ else
 
   protected override async Task OnParametersSetAsync()
   {
-    await Task.Delay(1000);
+    await Task.Delay(500);
 
     if (string.IsNullOrWhiteSpace(Country))
     {
